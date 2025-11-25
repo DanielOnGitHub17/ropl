@@ -1,6 +1,6 @@
 # ROPL - Run On Page Load
 
-A Chrome extension that allows you to inject and run custom JavaScript code on specific websites when they load.
+A Microsoft Edge/Chrome extension that allows you to inject and run custom JavaScript code on specific websites when they load.
 
 ## Features
 
@@ -14,14 +14,14 @@ A Chrome extension that allows you to inject and run custom JavaScript code on s
 ## Installation
 
 1. Clone or download this repository
-2. Open Chrome and navigate to `chrome://extensions/`
+2. Open Microsoft Edge/Chrome and navigate to `edge://extensions/` or `chrome://extensions/`
 3. Enable "Developer mode" (toggle in top-right corner)
 4. Click "Load unpacked"
 5. Select the `ropl` folder
 
 ## Usage
 
-1. Click the ROPL extension icon in your Chrome toolbar
+1. Click the ROPL extension icon in your browser toolbar
 2. Type or paste your JavaScript code in the editor
 3. Check "Run Code" to enable auto-execution on page load
 4. (Optional) Set a delay in milliseconds before the code runs
