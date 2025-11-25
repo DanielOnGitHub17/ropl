@@ -1,0 +1,21 @@
+{
+    "manifest_version": 3,
+    "name": "ROPL",
+    "version": "1.0",
+    "description": "Runs a script on page reload",
+    "action": {
+        "default_popup": "popup.html",
+        "default_title": "Hello World",
+        "default_icon": "icon.png"
+    },
+    "permissions": [
+        "tabs",
+        "webNavigation"
+    ],
+    "icons": {
+        "16": "icon.png",
+        "32": "icon.png",
+        "48": "icon.png",
+        "128": "icon.png"
+    }
+}

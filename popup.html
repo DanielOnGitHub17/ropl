@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>ROPL Editor</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="funcs.js"></script>
+  </head>
+  <body>
+    <textarea id="editor" placeholder="// Type your code here"></textarea>
+    <div>
+      <label>
+        <input type="checkbox" id="runCode">
+        Run Code
+      </label>
+    </div>
+    <div>
+      <label>
+        Time to wait (ms):
+        <input type="number" id="timeToWait" placeholder="0">
+      </label>
+    </div>
+    <button id="saveBtn">Save</button>
+    <script src="popup.js"></script>
+  </body>
+</html>
