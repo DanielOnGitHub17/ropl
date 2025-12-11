@@ -13,8 +13,10 @@ chrome.webNavigation.onCommitted.addListener(async (details) => {
                 try {
                     await chrome.scripting.executeScript({
                         target: { tabId: details.tabId },
-                        world: "MAIN",
-                        func: (code) => eval(code),
+                        world: "ISOLATED",
+                        func: (code) => {
+                            (new Function(code))();
+                        },
                         args: [hostData.code]
                     });
                     console.log("ROPL: Code executed successfully");

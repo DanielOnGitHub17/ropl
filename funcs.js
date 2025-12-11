@@ -1,45 +1,45 @@
 //start general
-class Vec{
-    constructor(x, y){
+class Vec {
+    constructor(x, y) {
         this.x = x;
-        (y==undefined) ? this.y = x: this.y = y;
+        (y == undefined) ? this.y = x : this.y = y;
     }
-    plus(another){
-     this.x = this.x + another.x; this.y = this.y + another.y;
+    plus(another) {
+        this.x = this.x + another.x; this.y = this.y + another.y;
     }
-    factor(n){
-        return new Vec(this.x*n, this.y*n)
+    factor(n) {
+        return new Vec(this.x * n, this.y * n)
     }
 }
-function setPosition(sprite, where, str='%'){
-    sprite.style.left = where.x+str; sprite.style.top=where.y+str;
+function setPosition(sprite, where, str = '%') {
+    sprite.style.left = where.x + str; sprite.style.top = where.y + str;
 }
-function setRotation(sprite, angle){
+function setRotation(sprite, angle) {
     sprite.style.transform = `rotate(${angle}deg)`;
 }
-function setBackground(sprite, src){
+function setBackground(sprite, src) {
     sprite.style.backgroundImage = `url(${src})`
 }
-function touching(rect1, rect2){
-    if(rect1.right > rect2.left
-        && rect1.left < rect2.right ){
-       // rect1 is intersecting rect2 on x axis
-       // But they could be at different heights
+function touching(rect1, rect2) {
+    if (rect1.right > rect2.left
+        && rect1.left < rect2.right) {
+        // rect1 is intersecting rect2 on x axis
+        // But they could be at different heights
 
-       if(rect1.top < rect2.bottom
-           && rect1.bottom > rect2.top ){
-           // rect1 is intersecting rect2 on y axis as well
-           // Collision detected
-           return true;
-     }
-   }; return false;
+        if (rect1.top < rect2.bottom
+            && rect1.bottom > rect2.top) {
+            // rect1 is intersecting rect2 on y axis as well
+            // Collision detected
+            return true;
+        }
+    }; return false;
 };
-function d(dom){
+function d(dom) {
     let f = parseFloat;
-    return new DOMRect(f(dom.style.left),f(dom.style.top)
-      ,f(dom.style.width),f(dom.style.height))
+    return new DOMRect(f(dom.style.left), f(dom.style.top)
+        , f(dom.style.width), f(dom.style.height))
 };
-/*for shoot before but can be used for others*/function restart(msg, run=reset, styles, prompt='restart'){
+/*for shoot before but can be used for others*/function restart(msg, run = reset, styles, prompt = 'restart') {
     //this can also be used for pausing
     let msgbox = make();
     msgbox.id = 'restarter';
@@ -50,251 +50,255 @@ function d(dom){
     button.before(' click button to restart: ')
     if (styles) manyStyles(msg, styles)
     button.onclick = run
-    button.addEventListener('click', ()=>{msgbox.remove()})
+    button.addEventListener('click', () => { msgbox.remove() })
 }
-/*this one too*/function loadSounds(folder = '../../Vs Projects/sound/Wav/',_='.wav',
-    sources = ['mouse_click', 'monster_minigun','shotgun',
-     'monster_hit', 'mouse_error', 'explosion', 'male_death',
-     'bomb_activate', 'energy_on', 'big_explosion', 'Rip']){
+/*this one too*/function loadSounds(folder = '../../Vs Projects/sound/Wav/', _ = '.wav',
+    sources = ['mouse_click', 'monster_minigun', 'shotgun',
+        'monster_hit', 'mouse_error', 'explosion', 'male_death',
+        'bomb_activate', 'energy_on', 'big_explosion', 'Rip']) {
     sound = [];
-    for(let i=0; i<sources.length; i++){
-        sound[i]= new Audio;
-        sound[i].src = folder+sources[i]+_
+    for (let i = 0; i < sources.length; i++) {
+        sound[i] = new Audio;
+        sound[i].src = folder + sources[i] + _
     }
 }
-function sameChild(first, second){
-    for (let i = 0; i<first.length; i++){
-        if (first[i]==second[i]) return true
+function sameChild(first, second) {
+    for (let i = 0; i < first.length; i++) {
+        if (first[i] == second[i]) return true
     }
     return false
 }
-function sameArray(first, second){
+function sameArray(first, second) {
     if (first.length != second.length) return false;
-    for (let i = 0; i < first.length; i++){
+    for (let i = 0; i < first.length; i++) {
         if (first[i] != second[i]) return false;
     }
     return true
 }
-function showAndHide(text='Ouch', time){
+function showAndHide(text = 'Ouch', time) {
     //do that it will check if info exists, create if it doesn't and style it;
     info.textContent = text;
     info.style.opacity = 1;
-    setTimeout(()=>info.style.opacity=0, time)
+    setTimeout(() => info.style.opacity = 0, time)
 }
-function repeat(n, f){
-    for (let i = 0; i<n; i++){
+function repeat(n, f) {
+    for (let i = 0; i < n; i++) {
         f()
     }
 }
-function identical(A1, A2){
-    for (let i of A1){
-        if (A2.indexOf(i)==-1) return false
+function identical(A1, A2) {
+    for (let i of A1) {
+        if (A2.indexOf(i) == -1) return false
     }
     return true;
 }
-function manyStyles(node, a={}){
-    for (let x in node.style){
-        if (x in a){
-            node.style[x]= a[x];
+function manyStyles(node, a = {}) {
+    for (let x in node.style) {
+        if (x in a) {
+            node.style[x] = a[x];
         }
     }
 }
-function anyStyles(node, a={}){
-    for (let x in a){
-        node.style.setProperty(x,  a[x])
+function anyStyles(node, a = {}) {
+    for (let x in a) {
+        node.style.setProperty(x, a[x])
     }
 }
-/*was for matrix.html*/function stopSign(){
-    if (['-', '+', ''].includes(event.key)){
+/*was for matrix.html*/function stopSign() {
+    if (['-', '+', ''].includes(event.key)) {
         event.preventDefault()
     }
 }
-/*was for matrix.html*/function changeSign(){
-    event.target.textContent = (event.target.textContent == '+')?'-':'+'
+/*was for matrix.html*/function changeSign() {
+    event.target.textContent = (event.target.textContent == '+') ? '-' : '+'
 }
-function sum(array){
+function sum(array) {
     let s = 0;
-    array.forEach(i=>s+=i);
+    array.forEach(i => s += i);
     return s;
 }
 
-function noSound(where, pos='absolute'){let mute = make('input');
-mute.id = 'mute'; mute.type = 'checkbox';
-where.appendChild(mute); mute.style.position = pos;
-mute.onchange = ()=>sound.forEach(i=>i.volume = mute.checked+0);
-mute.before('Play sound '); mute.checked = true;}
+function noSound(where, pos = 'absolute') {
+    let mute = make('input');
+    mute.id = 'mute'; mute.type = 'checkbox';
+    where.appendChild(mute); mute.style.position = pos;
+    mute.onchange = () => sound.forEach(i => i.volume = mute.checked + 0);
+    mute.before('Play sound '); mute.checked = true;
+}
 
-function startAgainWithoutRefresh(){}
-function collapser(){}
+function startAgainWithoutRefresh() { }
+function collapser() { }
 //for phone
-touch = {'↖':[0, 3],
-'↑':0,
-'↗':[0, 1],
-'←':3,
-'→':1,
-'↙':[2, 3],
-'↓':2,
-'↘':[1, 2],}
+touch = {
+    '↖': [0, 3],
+    '↑': 0,
+    '↗': [0, 1],
+    '←': 3,
+    '→': 1,
+    '↙': [2, 3],
+    '↓': 2,
+    '↘': [1, 2],
+}
 tX = 0; tY = 0;
 pad = window['pad']
 //i did it for block breaker
-function goToScreen(screenName, t='', container=document.body, selected=window['selected']){
-    Array.from(container.children).forEach(i=>{
-        let det = (i.id==screenName);
+function goToScreen(screenName, t = '', container = document.body, selected = window['selected']) {
+    Array.from(container.children).forEach(i => {
+        let det = (i.id == screenName);
         i.selected = det;
-        if(det){
-           i.incase = t;
-           i.style.display='';
-           i.back = selected;
-           i.selected = det;
-           selected = i;
-//            return
-        } else{i.style.display='none'}
+        if (det) {
+            i.incase = t;
+            i.style.display = '';
+            i.back = selected;
+            i.selected = det;
+            selected = i;
+            //            return
+        } else { i.style.display = 'none' }
     })
 }
-function position(div, x, y, _='px'){
-    div.style.transform = `translate(${x+_}, ${y+_})`
+function position(div, x, y, _ = 'px') {
+    div.style.transform = `translate(${x + _}, ${y + _})`
 }
 
-function copy(array, fill){
+function copy(array, fill) {
     let ans = [];
-    array.forEach(i=>{
-        if(i instanceof Array){
+    array.forEach(i => {
+        if (i instanceof Array) {
             let j = copy(i, fill);
             ans.push(j);
-        } else{ans.push(fill?fill:i)}
+        } else { ans.push(fill ? fill : i) }
     });
     return ans;
 }
 
-let make = (name='div')=>document.createElement(name)
-  , makeSVG=(name)=>document.createElementNS('http://www.w3.org/2000/svg', name)
-  , get = (id)=>document.getElementById(id)
-  , getE = (selector,value)=>document.querySelector(`[${selector}=${value}]`)
-  , getS = (query)=>document.querySelector(query)
-  , getAll = (query)=>[...document.querySelectorAll(query)]
-  , identify = ()=>getAll('[id]').forEach(i=>window[i.id] = i)
-  , add = (what,to=document.body)=>to.appendChild(what)
-  , bx = (who)=>who.getBoundingClientRect()
-  , show = (what) => what.style.display=""
-  , hide = (what) => what.style.display="none"
-  , domAt = (x, y) => document.elementFromPoint(x, y)
-  , reclass = (dom, className, remove=0) => dom.classList[remove?"remove":"add"](className)
-  , hasClass = (dom, className)=>dom.classList.contains(className);
-  
+let make = (name = 'div') => document.createElement(name)
+    , makeSVG = (name) => document.createElementNS('http://www.w3.org/2000/svg', name)
+    , get = (id) => document.getElementById(id)
+    , getE = (selector, value) => document.querySelector(`[${selector}=${value}]`)
+    , getS = (query) => document.querySelector(query)
+    , getAll = (query) => [...document.querySelectorAll(query)]
+    , identify = () => getAll('[id]').forEach(i => window[i.id] = i)
+    , add = (what, to = document.body) => to.appendChild(what)
+    , bx = (who) => who.getBoundingClientRect()
+    , show = (what) => what.style.display = ""
+    , hide = (what) => what.style.display = "none"
+    , domAt = (x, y) => document.elementFromPoint(x, y)
+    , reclass = (dom, className, remove = 0) => dom.classList[remove ? "remove" : "add"](className)
+    , hasClass = (dom, className) => dom.classList.contains(className);
+
 
 
 // still DOM functions
-function switchScreen(screenID){
-    getAll("body>div").forEach(div=>{if (div.id) div.style.display = "none"});
+function switchScreen(screenID) {
+    getAll("body>div").forEach(div => { if (div.id) div.style.display = "none" });
     get(screenID).style.display = "";
 };
 
 // events framework
-function configureEvents(events){
-    for (let type in events){
-        for (let handler of events[type]){
+function configureEvents(events) {
+    for (let type in events) {
+        for (let handler of events[type]) {
             window.addEventListener(type, handler);
         }
     }
 }
 
 // initialize the loading element, that blocks the screen and all
-function loader(){
-  let loading;
-  (loading = make()).id = "LOADING";
-  showLoading = (text="") => add(loading).style.setProperty("--content", `"${text}"`);
-  hideLoading = () => loading.remove();
-  isPageLoading = () => loading.isConnected;
-  const N = 10;
-  for (let n = 0; n < N; n++){
-      let c;
-      (c = make()).id = 'c'+n;
-      c.style.animationDelay = n/N+'s';
-      // use other numbers apart from .1 to see effects;
-      // will have to change animation-duration and dimensions too
-      loading.append(c);
-  };
+function loader() {
+    let loading;
+    (loading = make()).id = "LOADING";
+    showLoading = (text = "") => add(loading).style.setProperty("--content", `"${text}"`);
+    hideLoading = () => loading.remove();
+    isPageLoading = () => loading.isConnected;
+    const N = 10;
+    for (let n = 0; n < N; n++) {
+        let c;
+        (c = make()).id = 'c' + n;
+        c.style.animationDelay = n / N + 's';
+        // use other numbers apart from .1 to see effects;
+        // will have to change animation-duration and dimensions too
+        loading.append(c);
+    };
 };
 
 // math
 // not inclusive of the last one (a is the little one)
-function randBtw(a, b){
-    return a+parseInt((b-a)*Math.random());
+function randBtw(a, b) {
+    return a + parseInt((b - a) * Math.random());
 };
 
 // others for data handling
-let choice = (array)=>array[randBtw(0, array.length)]
-  , jsonStr = (obj)=>JSON.stringify(obj)
-  , jsonObj = (str)=>JSON.parse(str)
-  , copyObj = (obj)=>jsonObj(jsonStr(obj))
-  , logTurn = (obj) => (console.log(obj), obj)
-  , transfer = (object, from, to) => to.push(from.splice(from.indexOf(object), 1)[0])
-  , remove = (what, from) => from.splice(from.indexOf(what), 1)
-  , local = (item, value)=>value ? localStorage.setItem(item, value) : localStorage[item];
+let choice = (array) => array[randBtw(0, array.length)]
+    , jsonStr = (obj) => JSON.stringify(obj)
+    , jsonObj = (str) => JSON.parse(str)
+    , copyObj = (obj) => jsonObj(jsonStr(obj))
+    , logTurn = (obj) => (console.log(obj), obj)
+    , transfer = (object, from, to) => to.push(from.splice(from.indexOf(object), 1)[0])
+    , remove = (what, from) => from.splice(from.indexOf(what), 1)
+    , local = (item, value) => value ? localStorage.setItem(item, value) : localStorage[item];
 
-function populate(n, val=""){
+function populate(n, val = "") {
     let result = [];
     for (let i = 0; i < n; i++) {
-       result.push(val);
+        result.push(val);
     };
     return result;
 }
 
-  // Fetch API POST usage
-function getFromServer(url, body){
-  return fetch(url, {
-      method: "post",
-      headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'X-CSRFToken': getS(`[name=csrfmiddlewaretoken]`).value
-      },
-  
-      body: JSON.stringify(body)
-  });
+// Fetch API POST usage
+function getFromServer(url, body) {
+    return fetch(url, {
+        method: "post",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getS(`[name=csrfmiddlewaretoken]`).value
+        },
+
+        body: JSON.stringify(body)
+    });
 };
 
 // speechSynthesis
 // get voice from voice name
-function getVoice(name){
-  return speechSynthesis.getVoices().find(i=>i.name == name);
+function getVoice(name) {
+    return speechSynthesis.getVoices().find(i => i.name == name);
 };
 
-function isPhone(){
-  return navigator.userAgentData.mobile;
+function isPhone() {
+    return navigator.userAgentData.mobile;
 }
 
 //start math
-function randP1(){
+function randP1() {
     n = Math.random();
-    while (n<0.5) n *= 2;
+    while (n < 0.5) n *= 2;
     return n;
 }
-function random(n){
-    return parseInt(n*Math.random())
+function random(n) {
+    return parseInt(n * Math.random())
 }
 
-function sin(deg){
-    deg = deg*Math.PI/180;
+function sin(deg) {
+    deg = deg * Math.PI / 180;
     return Math.sin(deg);
 }
 
-function cos(deg){
-    deg = deg*Math.PI/180;
+function cos(deg) {
+    deg = deg * Math.PI / 180;
     return Math.cos(deg);
 }
-tan = (x) => sin(x)/cos(x);
-atan=(y, x=1)=>Math.atan2(y, x)*(180/Math.PI);
-['asin', 'acos'].forEach(a=>window[a]=(x)=>Math[a](x)*(180/Math.PI));
+tan = (x) => sin(x) / cos(x);
+atan = (y, x = 1) => Math.atan2(y, x) * (180 / Math.PI);
+['asin', 'acos'].forEach(a => window[a] = (x) => Math[a](x) * (180 / Math.PI));
 //end math
 //end general
 
 //start shoot.html
-function setSize(sprite, size, _='%'){
-    sprite.style.width = size.x+_; sprite.style.height = size.y+_;
+function setSize(sprite, size, _ = '%') {
+    sprite.style.width = size.x + _; sprite.style.height = size.y + _;
 }
 
-function load(){
+function load() {
     location.reload();
 }
