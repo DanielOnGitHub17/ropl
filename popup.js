@@ -9,18 +9,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     const currentUrl = tab.url;
     const currentHost = new URL(currentUrl).host;
 
-    chrome.webNavigation.onCompleted.addListener((details) => {
-        console.log("Navigation completed:", details.url);
+    // Load saved data using chrome.storage instead of localStorage
+    chrome.storage.local.get([currentHost], (result) => {
+        const hostData = result[currentHost] || {};
+        editor.value = hostData.code || "";
+        runCode.checked = hostData.runCode || false;
+        timeToWait.value = hostData.timeToWait || "";
     });
-
-    // alert(currentHost);
-
-    // Load saved data
-    let hostData = JSON.parse(localStorage.getItem(currentHost)) || {};
-
-    editor.value = hostData.code || "";
-    runCode.checked = hostData.runCode || false;
-    timeToWait.value = hostData.timeToWait || "";
 
     saveBtn.addEventListener("click", () => {
         const data = {
@@ -28,13 +23,14 @@ document.addEventListener("DOMContentLoaded", async () => {
             runCode: runCode.checked,
             timeToWait: timeToWait.value
         };
-        localStorage.setItem(currentHost, JSON.stringify(data));
-        console.log("Saved content:", data);
-        // alert("Saved!");
+        chrome.storage.local.set({ [currentHost]: data }, () => {
+            console.log("Saved content:", data);
+            showAndHide("Saved - refresh the page to run your code", 3000);
+        });
     });
 
-    document.addEventListener("keydown", (event) =>{
-        if (event.ctrlKey && event.key == "s") {
+    document.addEventListener("keydown", (event) => {
+        if (event.ctrlKey && event.key == 's') {
             event.preventDefault();
             saveBtn.click();
         }

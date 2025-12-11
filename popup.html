@@ -7,7 +7,8 @@
     <script src="funcs.js"></script>
   </head>
   <body>
-    <textarea id="editor" placeholder="// Type your code here"></textarea>
+    <div id="info"></div>
+    <textarea id="editor" spellcheck="false" placeholder="// Type your JS code here"></textarea>
     <div>
       <label>
         <input type="checkbox" id="runCode">
@@ -17,10 +18,12 @@
     <div>
       <label>
         Time to wait (ms):
-        <input type="number" id="timeToWait" placeholder="0">
+        <input type="number" id="timeToWait" placeholder="500">
       </label>
     </div>
     <button id="saveBtn">Save</button>
+    <!-- Along with Run Code button, add button to decide whether to treat as code or not - it'll hide run code button I guess -->
+    <!-- Add option for users to decide whether they want just domain, first slash after, second after, etc as the 'key'... -->
     <script src="popup.js"></script>
   </body>
 </html>
