@@ -33,11 +33,15 @@ Scripts are saved per domain, so each website can have its own custom code.
 
 - `tabs` - Read active tab URL
 - `webNavigation` - Detect page load events
+- `storage` - Store scripts per domain
+- `scripting` - Inject scripts into web pages
+- `host_permissions` - Access all URLs for code injection
 
 ## Development
 
 The extension uses:
 - Manifest V3
-- Chrome Storage API (localStorage)
+- Chrome Storage API (chrome.storage.local)
 - Chrome Tabs API
-- Chrome Web Navigation API
+- Chrome Web Navigation API (onCommitted event)
+- Script injection via chrome.scripting API

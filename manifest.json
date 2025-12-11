@@ -10,8 +10,16 @@
     },
     "permissions": [
         "tabs",
-        "webNavigation"
+        "webNavigation",
+        "scripting",
+        "storage"
     ],
+    "host_permissions": [
+        "<all_urls>"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
     "icons": {
         "16": "icon.png",
         "32": "icon.png",
